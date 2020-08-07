@@ -16,13 +16,5 @@ class MainActivity : AppCompatActivity() {
             var password = etPassword.text
             Toast.makeText(baseContext, Name, Toast.LENGTH_LONG).show()
 
-
-
-        }
-        btnLogin.setOnClickListener() {
-            var name = et.name.toString()
-            var password = etPassword.text
-            Toast.makeText(baseContext, name, Toast.LENGTH_LONG).show()
-
         }
 }
