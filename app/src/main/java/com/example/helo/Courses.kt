@@ -20,7 +20,7 @@ class Courses : AppCompatActivity() {
                 courses("4536", "Flask", "30", "Frey", "Ruby on rails")
 
             )
-                tvCourses.adapter = coursesRecyclerViewAdapter
+                tvCourses.adapter = coursesRecyclerViewAdapter 
     }
 }
 
