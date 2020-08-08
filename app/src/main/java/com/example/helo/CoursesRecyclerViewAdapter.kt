@@ -8,33 +8,27 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.helo.Courses
 import com.example.helo.R
+import kotlinx.android.synthetic.main.activity_courses.view.*
 
-abstract class CoursesRecyclerViewAdapter (
-    val courses:List<CoursesRecyclerViewAdapter>):
-    AppCompatActivity<CoursesRecyclerViewAdapter.CoursesViewHolder>(){
-    abstract override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CoursesRecyclerViewAdapter.CoursesViewHolder (
 
-    LayoutInflater.from(parent.context).inflate(R.layout.item_courses,parent,false)
-    )
-    override fun getItemCount() = courses.size
 
-    override fun onBindViewHolder(
-        holder: CoursesRecyclerViewAdapter.CoursesViewHolder,
-        position: Int) {
-        val courses = courses[position]
-        holder.itemView.id.text = courses.id
-        holder.itemView.name.text = courses.name
-        holder.itemView.code = courses.code
-        holder.itemView.id.instructor = courses.instructor
-        holder.itemView.description = courses.description
+class CoursesRecyclerViewAdapter(val coursesList: List<Courses>
+) :
+    RecyclerView.Adapter<CoursesRecyclerViewAdapter.NamesViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NamesViewHolder {
+        var itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_courses_item, parent, false)
+        return NamesViewHolder(itemView)
     }
 
-    class CoursesViewHolder ( View: View) : RecyclerView.ViewHolder(view)
+    override fun getItemCount(): Int {
+        return coursesList.size
+    }
 
-}
 
-)
+    override fun onBindViewHolder(holder: NamesViewHolder, position: Int) {
+        holder.rowView.tvCourses.text = coursesList[position].toString()
+    }
+
+    class NamesViewHolder(val rowView: View) : RecyclerView.ViewHolder(rowView)
 }

@@ -2,28 +2,39 @@ package com.example.helo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.row_courses_item.*
+import com.example.helo.CoursesRecyclerViewAdapter as CoursesRecyclerViewAdapter1
 
-class Courses : AppCompatActivity() {
+
+
+data class Courses(val course_id: Int, val course_name: String, val course_code: Int, val instructor:String, val description:String)
+
+
+class CourseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_courses)
-        val courses = listOf(
-                courses("4536", "Ruby", "33", "Monte", "Ruby on rails")
-                courses("5674", "Php", "30", "Carlo", "This is PHP")
-                courses("4732", "HTML", "38", "Monique", "Web development")
-                courses("4698", "Flutter", "34", "James", "Android development")
-                courses("5080", "Python", "31", "James", "Game development")
-                courses("4536", "Java", "33", "Monte", "Ai")
-                courses("4536", "Javascript", "33", "zuzu", "Front-end web")
-                courses("4536", "C#", "28", "Else", "Arduino")
-                courses("4536", "Kotlin", "22", "Freia", "Ruby on rails")
-                courses("4536", "Flask", "30", "Frey", "Ruby on rails")
 
-            )
-                tvCourses.adapter = coursesRecyclerViewAdapter 
+        rvCourses.LayoutManager= LinearLayoutManager(baseContext)
+        val coursesRecyclerViewAdapter = CoursesRecyclerViewAdapter1(coursesList = listOf(
+
+            Courses(334,"Flutter",456,"George","Android development"),
+            Courses(788,"C#",456,"Nandy","Arduino"),
+            Courses(133,"Python",242,"Ohio","AI"),
+            Courses(466,"Ruby",465,"Linda","Ruby on rails"),
+            Courses(457,"React-Native",377,"Joyce","Android development"),
+            Courses(568,"Javascript",567,"Sharon","Front-end Web"),
+            Courses(570,"Django",130,"Gabriel","Framework"),
+            Courses(578,"Php",468,"Katara","Games development"),
+            Courses(759,"Kotlin",467,"Lesarge","Android development"),
+            Courses(255,"HTML",477,"Holly","UX Development"),
+            Courses(358,"C++",466,"Michael","Arduino")
+
+
+        ))
+        rvCourses.adapter= CoursesRecyclerViewAdapter1
     }
 }
 
-private operator fun <E> List<E>.invoke(e: E, e1: E, e2: E, e3: E, e4: E) {
-
-}
