@@ -1,34 +1,48 @@
 package com.example.helo
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.helo.Courses
-import com.example.helo.R
-import kotlinx.android.synthetic.main.activity_courses.view.*
+import kotlinx.android.synthetic.main.row_courses_item.view.*
 
 
-
-class CoursesRecyclerViewAdapter(val coursesList: List<Courses>
+class CoursesRecyclerViewAdapter(val courseList: List<Course>
 ) :
-    RecyclerView.Adapter<CoursesRecyclerViewAdapter.NamesViewHolder>() {
+    RecyclerView.Adapter<CoursesRecyclerViewAdapter.CoursesViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NamesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoursesViewHolder {
         var itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_courses_item, parent, false)
-        return NamesViewHolder(itemView)
+        return CoursesViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
-        return coursesList.size
+        return courseList.size
     }
 
 
-    override fun onBindViewHolder(holder: NamesViewHolder, position: Int) {
-        holder.rowView.tvCourses.text = coursesList[position].toString()
+    override fun onBindViewHolder(holder: CoursesViewHolder, position: Int) {
+        holder.rowView.tvCourseId.text = courseList[position].courseId
+        holder.rowView.tvCourseCode.text = courseList[position].courseCode
+        holder.rowView.tvCourseName.text = courseList[position].courseName
+        holder.rowView.tvDescription.text = courseList[position].description
+        holder.rowView.tvInstructor.text = courseList[position].instructor
+
     }
 
-    class NamesViewHolder(val rowView: View) : RecyclerView.ViewHolder(rowView)
+    class CoursesViewHolder(val rowView: View) : RecyclerView.ViewHolder(rowView)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
