@@ -1,11 +1,18 @@
 package com.example.helo
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_registration.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,9 +25,66 @@ class MainActivity : AppCompatActivity() {
         }
         btnbutton.setOnClickListener() {
             var Name = etName.text.toString()
-            var password = etPassword.text
+            var password = etPassword.text.toString()
+
+
+
+            if(Name.isBlank() || Name.isEmpty()){
+                etName.error="Username  is required"
+            }
+            if(password.isBlank() || password.isEmpty()){
+                etPassword.error="Password is required"
+            }
+
+            progressBar.max=3000
+            val currentProgress=900
+            ObjectAnimator.ofInt(progressBar,"progress",currentProgress)
+                .setDuration(2000)
+                .start()
+
+            var requestBody = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("email", Name)
+
+                .addFormDataPart("password", password)
+                .build()
+            loginStudents(requestBody)
             Toast.makeText(baseContext, Name, Toast.LENGTH_LONG).show()
 
 
         }
+}
+    fun loginStudents(requestBody: RequestBody) {
+        val apiClient = ApiClient.buildService(LoginApiInterface::class.java)
+        val loginCall = apiClient.loginStudent(requestBody)
+        loginCall.enqueue(object : Callback<LoginRespose.LoginResponse> {
+            override fun onFailure(call: Call<LoginRespose.LoginResponse>, t: Throwable) {
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(
+                call: Call<LoginRespose.LoginResponse>,
+                response: Response<LoginRespose.LoginResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Toast.makeText(baseContext, response.body()?.message, Toast.LENGTH_LONG)
+                        .show()
+                    var accessToken = response.body()?.accessToken
+                    var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(baseContext)
+                    var editor = sharedPreferences.edit()
+                    editor.putString("ACCESS_TOKEN_KEY", accessToken)
+                    editor.apply()
+                    val intent = Intent(baseContext, CoursesActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(
+                        baseContext,
+                        response.errorBody().toString(),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        })
+    }
 }

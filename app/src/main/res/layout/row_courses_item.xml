@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvCourseId"
+        android:id="@+id/rvCourses"
         android:layout_width="106dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
