@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 }
     fun loginStudents(requestBody: RequestBody) {
         val apiClient = ApiClient.buildService(LoginApiInterface::class.java)
-        val loginCall = apiClient.loginStudent(requestBody)
+        val loginCall = apiClient.loginStudents(requestBody)
         loginCall.enqueue(object : Callback<LoginRespose.LoginResponse> {
             override fun onFailure(call: Call<LoginRespose.LoginResponse>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
