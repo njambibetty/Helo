@@ -1,4 +1,4 @@
-package com.example.helo
+package com.example.helo.API
 
 import retrofit2.Call
 import retrofit2.http.Body

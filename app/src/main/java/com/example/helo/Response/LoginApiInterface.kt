@@ -1,4 +1,4 @@
-package com.example.helo
+package com.example.helo.Response
 
 import okhttp3.RequestBody
 import retrofit2.Call

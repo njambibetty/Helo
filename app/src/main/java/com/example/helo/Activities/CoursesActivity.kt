@@ -1,4 +1,4 @@
-package com.example.helo
+package com.example.helo.Activities
 
 import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.helo.*
 
 import kotlinx.android.synthetic.main.activity_courses2.*
 import kotlinx.android.synthetic.main.activity_registration.*
@@ -45,7 +46,8 @@ class CoursesActivity : AppCompatActivity() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(baseContext)
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN_KEY", "")
 
-        val apiClient = ApiClient.buildService(ApiInterface::class.java)
+        val apiClient =
+            ApiClient.buildService(ApiInterface::class.java)
         val coursesCall = apiClient.getCourses("Bearer " + accessToken)
         coursesCall.enqueue(object : Callback<CoursesResponse> {
             override fun onFailure(call: Call<CoursesResponse>, t: Throwable) {
@@ -58,7 +60,8 @@ class CoursesActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     var courseList = response.body()?.courses as List<Course>
-                    var coursesAdapter = CoursesRecyclerViewAdapter(courseList)
+                    var coursesAdapter =
+                        CoursesRecyclerViewAdapter(courseList)
                     rvCourses.layoutManager = LinearLayoutManager(baseContext)
                     rvCourses.adapter = coursesAdapter
                 } else {

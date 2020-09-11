@@ -1,19 +1,20 @@
-package com.example.helo
+package com.example.helo.Activities
 
 import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.widget.Toast
+import com.example.helo.ApiClient
+import com.example.helo.ApiInterface
+import com.example.helo.R
+import com.example.helo.RegistrationResponse
 import kotlinx.android.synthetic.main.activity_registration.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Multipart
 
 class Registrationactivity : AppCompatActivity() {
 
@@ -68,7 +69,8 @@ class Registrationactivity : AppCompatActivity() {
 
         }
         fun registerUser(requestBody: RequestBody) {
-            var apiClient = ApiClient.buildService(ApiInterface::class.java)
+            var apiClient =
+                ApiClient.buildService(ApiInterface::class.java)
             var registrationCall = apiClient.registerStudent(requestBody)
             registrationCall.enqueue(object : Callback<RegistrationResponse> {
                 override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {

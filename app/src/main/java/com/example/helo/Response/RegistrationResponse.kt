@@ -1,5 +1,6 @@
-package com.example.helo
+package com.example.helo.Response
 
+import com.example.helo.Student
 import com.google.gson.annotations.SerializedName
 
 class RegistrationResponse {
