@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         tvRegistar.setOnClickListener{
-            val intent=Intent(baseContext,RegistrationActivity::class.java)
+            val intent=Intent(baseContext,Registrationactivity::class.java)
             startActivity(intent)
         }
         btnbutton.setOnClickListener() {
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             }
             if(password.isBlank() || password.isEmpty()){
                 error = true
-                etPassword.error="Password is required"
+                etPhone.error="Password is required"
             }
 
             progressBar.max=3000
