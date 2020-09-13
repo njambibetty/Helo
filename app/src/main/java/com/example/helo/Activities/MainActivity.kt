@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
         btnbutton.setOnClickListener() {
             var Name = etName.text.toString()
-            var password = etPassword.text.toString()
+            var password = etPhone.text.toString()
             var error = false
 
 
